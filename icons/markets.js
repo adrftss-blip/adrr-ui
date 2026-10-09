@@ -1,20 +1,12 @@
 // Markets Icon Component
 export const MarketsIcon = () => {
-    const icon = document.createElement('i');
-    icon.className = 'fas fa-chart-bar';
-    return icon;
+  const i = document.createElement('i');
+  i.className = 'fa-solid fa-chart-column';
+  return i;
 };
 
 export const MarketsLabel = () => {
-    const span = document.createElement('span');
-    span.textContent = 'الأسواق';
-    return span;
-};
-
-export const createMarketsNavItem = () => {
-    const item = document.createElement('div');
-    item.className = 'nav-item';
-    item.appendChild(MarketsIcon());
-    item.appendChild(MarketsLabel());
-    return item;
+  const span = document.createElement('span');
+  span.textContent = 'الأسواق';
+  return span;
 };

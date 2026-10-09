@@ -1,20 +1,12 @@
-// Trading Icon Component (Active)
+// Trading Icon Component
 export const TradingIcon = () => {
-    const icon = document.createElement('i');
-    icon.className = 'fas fa-exchange-alt';
-    return icon;
+  const i = document.createElement('i');
+  i.className = 'fa-solid fa-arrows-rotate';
+  return i;
 };
 
 export const TradingLabel = () => {
-    const span = document.createElement('span');
-    span.textContent = 'التداول';
-    return span;
-};
-
-export const createTradingNavItem = () => {
-    const item = document.createElement('div');
-    item.className = 'nav-item active';
-    item.appendChild(TradingIcon());
-    item.appendChild(TradingLabel());
-    return item;
+  const span = document.createElement('span');
+  span.textContent = 'التداول';
+  return span;
 };
