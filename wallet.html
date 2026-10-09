@@ -21,6 +21,7 @@
       background: #000;
       color: #fff;
       font-family: 'Cairo', sans-serif;
+      overflow: hidden;
     }
 
     body {
@@ -46,34 +47,39 @@
       align-items: center;
       justify-content: center;
       padding: 20px;
+      overflow: hidden;
     }
 
     .page-title {
-      font-size: 24px;
-      font-weight: 600;
+      font-size: 32px;
+      font-weight: 700;
       letter-spacing: 0.5px;
     }
 
     .bottom-nav {
-      position: absolute;
+      position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
+      width: 100%;
+      max-width: 430px;
       height: 100px;
       background: #000;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      align-items: stretch;
+      align-items: flex-start;
       padding: 8px 0 12px 0;
+      z-index: 100;
     }
 
     .nav-item {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: flex-start;
+      gap: 4px;
       text-decoration: none;
       color: rgba(255, 255, 255, 0.6);
       transition: all 0.3s ease;
@@ -81,22 +87,12 @@
       border: none;
       background: transparent;
       font-family: 'Cairo', sans-serif;
-    }
-
-    .nav-item:hover {
-      color: rgba(255, 255, 255, 0.9);
-    }
-
-    .nav-item.active {
-      color: #fff;
-    }
-
-    .nav-item.active i {
-      font-size: 26px;
+      padding-top: 6px;
+      transform: translateY(-4px);
     }
 
     .nav-item i {
-      font-size: 22px;
+      font-size: 24px;
       line-height: 1;
       transition: font-size 0.2s ease;
     }
@@ -105,37 +101,56 @@
       font-size: 11px;
       font-weight: 500;
       letter-spacing: 0.3px;
+      line-height: 1.2;
+    }
+
+    .nav-item.active {
+      color: #fff;
+    }
+
+    .nav-item.active i {
+      font-size: 27px;
+    }
+
+    .nav-item:hover {
+      color: #ddd;
     }
 
     .badge-count {
       position: absolute;
-      top: 0;
-      right: 8px;
+      top: 2px;
+      right: 12px;
       background: #ff3366;
       color: #fff;
       font-size: 10px;
       font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 8px;
-      min-width: 20px;
+      padding: 2px 6px;
+      border-radius: 10px;
+      min-width: 24px;
       text-align: center;
+      line-height: 1.4;
+      display: none;
+    }
+
+    .nav-item.home-badge .badge-count {
+      display: block;
     }
 
     @media (max-width: 380px) {
       .nav-item i {
-        font-size: 20px;
+        font-size: 22px;
       }
 
       .nav-item.active i {
-        font-size: 23px;
+        font-size: 25px;
       }
 
       .nav-item span {
         font-size: 10px;
       }
 
-      .bottom-nav {
-        height: 90px;
+      .page-title {
+        font-size: 28px;
       }
     }
   </style>
@@ -167,9 +182,10 @@
         <span>الأسواق</span>
       </a>
 
-      <a class="nav-item" href="home.html" aria-label="الصفحة الرئيسية">
+      <a class="nav-item home-badge" href="home.html" aria-label="الصفحة الرئيسية">
+        <span class="badge-count">99+</span>
         <i class="fa-solid fa-house"></i>
-        <span>الصفحة الرئيسية</span>
+        <span>الرئيسية</span>
       </a>
     </nav>
   </div>
