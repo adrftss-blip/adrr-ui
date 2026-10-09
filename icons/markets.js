@@ -4,9 +4,3 @@ export const MarketsIcon = () => {
   i.className = 'fa-solid fa-chart-column';
   return i;
 };
-
-export const MarketsLabel = () => {
-  const span = document.createElement('span');
-  span.textContent = 'الأسواق';
-  return span;
-};

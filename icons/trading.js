@@ -4,9 +4,3 @@ export const TradingIcon = () => {
   i.className = 'fa-solid fa-arrows-rotate';
   return i;
 };
-
-export const TradingLabel = () => {
-  const span = document.createElement('span');
-  span.textContent = 'التداول';
-  return span;
-};

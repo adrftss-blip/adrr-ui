@@ -4,9 +4,3 @@ export const FuturesIcon = () => {
   i.className = 'fa-solid fa-chart-line';
   return i;
 };
-
-export const FuturesLabel = () => {
-  const span = document.createElement('span');
-  span.textContent = 'العقود';
-  return span;
-};
