@@ -69,7 +69,7 @@
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       align-items: flex-start;
-      padding: 8px 0 12px 0;
+      padding: 10px 0 12px 0;
       z-index: 100;
     }
 
@@ -82,19 +82,18 @@
       gap: 4px;
       text-decoration: none;
       color: rgba(255, 255, 255, 0.6);
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
       cursor: pointer;
       border: none;
       background: transparent;
       font-family: 'Cairo', sans-serif;
-      padding-top: 6px;
-      transform: translateY(-4px);
+      padding-top: 0;
     }
 
     .nav-item i {
       font-size: 24px;
       line-height: 1;
-      transition: font-size 0.2s ease;
+      transition: font-size 0.15s ease;
     }
 
     .nav-item span {
@@ -129,6 +128,11 @@
       min-width: 24px;
       text-align: center;
       line-height: 1.4;
+      display: none;
+    }
+
+    .nav-item.home-badge .badge-count {
+      display: block;
     }
 
     @media (max-width: 380px) {
@@ -177,7 +181,7 @@
         <span>الأسواق</span>
       </a>
 
-      <a class="nav-item" href="home.html" aria-label="الصفحة الرئيسية">
+      <a class="nav-item home-badge" href="home.html" aria-label="الصفحة الرئيسية">
         <span class="badge-count">99+</span>
         <i class="fa-solid fa-house"></i>
         <span>الرئيسية</span>
