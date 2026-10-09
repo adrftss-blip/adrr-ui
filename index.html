@@ -3,36 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bottom Icons Only</title>
+  <title>Old Design</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body>
   <div class="app">
-    <main class="main-space"></main>
+    <header class="topbar">
+      <div class="topbar-inner">
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
+        <div class="nav-wrap">
+          <span>عقود فورية</span>
+          <span>الهامش</span>
+          <span class="active">Alpha</span>
+          <span>بوت التداول الآلي</span>
+          <span>المشاريع</span>
+        </div>
+        <div class="menu-btn"><i class="fa-solid fa-bars"></i></div>
+      </div>
+    </header>
 
-    <nav class="bottom-icons" aria-label="Bottom navigation">
-      <div class="icon-item">
+    <main class="content">
+      <div class="grid">
+        <div class="card card-wide"></div>
+        <div class="card card-tall"></div>
+        <div class="card card-tall"></div>
+        <div class="card card-mid"></div>
+        <div class="card card-mid"></div>
+        <div class="card card-tall"></div>
+        <div class="card card-tall"></div>
+        <div class="card card-wide"></div>
+        <div class="card card-mid"></div>
+        <div class="card card-tall"></div>
+        <div class="card card-wide"></div>
+        <div class="card card-tall"></div>
+      </div>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <div class="nav-item">
         <i class="fa-solid fa-wallet"></i>
         <span>الرصيد</span>
       </div>
-
-      <div class="icon-item">
+      <div class="nav-item">
         <i class="fa-solid fa-chart-line"></i>
-        <span>العقود</span>
+        <span>العقود الآجلة</span>
       </div>
-
-      <div class="icon-item active">
+      <div class="nav-item active-item">
         <i class="fa-solid fa-arrows-rotate"></i>
         <span>التداول</span>
       </div>
-
-      <div class="icon-item">
+      <div class="nav-item">
         <i class="fa-solid fa-chart-column"></i>
         <span>الأسواق</span>
       </div>
-
-      <div class="icon-item">
+      <div class="nav-item">
         <i class="fa-solid fa-house"></i>
         <span>الرئيسية</span>
       </div>
