@@ -1,37 +1,163 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Markets</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>الأسواق</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-</head>
-<body class="page markets-page">
-  <div class="page-shell">
-    <h1>الأسواق</h1>
-    <div class="card-box">
-      <i class="fa-solid fa-chart-column"></i>
-      <p>صفحة الأسواق</p>
-    </div>
-  </div>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <nav class="bottom-nav" aria-label="Bottom navigation">
-    <a class="nav-item" href="wallet.html" aria-label="الرصيد">
-      <i class="fa-solid fa-wallet"></i>
-    </a>
-    <a class="nav-item" href="futures.html" aria-label="العقود الآجلة">
-      <i class="fa-solid fa-chart-line"></i>
-    </a>
-    <a class="nav-item" href="trading.html" aria-label="التداول">
-      <i class="fa-solid fa-arrows-rotate"></i>
-    </a>
-    <a class="nav-item active-item" href="markets.html" aria-label="الأسواق">
-      <i class="fa-solid fa-chart-column"></i>
-    </a>
-    <a class="nav-item" href="home.html" aria-label="الرئيسية">
-      <i class="fa-solid fa-house"></i>
-    </a>
-  </nav>
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .phone-container {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content {
+      width: 100%;
+      height: calc(100vh - 100px);
+      background: #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .page-title {
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: #000;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      align-items: stretch;
+      padding: 8px 0 12px 0;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.6);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      background: transparent;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .nav-item:hover {
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-item.active {
+      color: #fff;
+    }
+
+    .nav-item.active i {
+      font-size: 26px;
+    }
+
+    .nav-item i {
+      font-size: 22px;
+      line-height: 1;
+      transition: font-size 0.2s ease;
+    }
+
+    .nav-item span {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    @media (max-width: 380px) {
+      .nav-item i {
+        font-size: 20px;
+      }
+
+      .nav-item.active i {
+        font-size: 23px;
+      }
+
+      .nav-item span {
+        font-size: 10px;
+      }
+
+      .bottom-nav {
+        height: 90px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-container">
+    <div class="content">
+      <h1 class="page-title">الأسواق</h1>
+    </div>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a class="nav-item" href="wallet.html" aria-label="الرصيد">
+        <i class="fa-solid fa-wallet"></i>
+        <span>الرصيد</span>
+      </a>
+
+      <a class="nav-item" href="futures.html" aria-label="العقود الآجلة">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>العقود الآجلة</span>
+      </a>
+
+      <a class="nav-item" href="trading.html" aria-label="التداول">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>التداول</span>
+      </a>
+
+      <a class="nav-item active" href="markets.html" aria-label="الأسواق">
+        <i class="fa-solid fa-chart-column"></i>
+        <span>الأسواق</span>
+      </a>
+
+      <a class="nav-item" href="home.html" aria-label="الصفحة الرئيسية">
+        <i class="fa-solid fa-house"></i>
+        <span>الصفحة الرئيسية</span>
+      </a>
+    </nav>
+  </div>
 </body>
 </html>
