@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>التداول</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #000;
+      color: #fff;
+      font-family: 'Cairo', sans-serif;
+      overflow: hidden;
+    }
+
+    body { display: flex; justify-content: center; align-items: center; }
+
+    .phone-container {
+      width: 100%;
+      max-width: 430px;
+      height: 100vh;
+      background: #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content {
+      width: 100%;
+      height: calc(100vh - 110px);
+      background: #000;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 22px 22px 125px;
+      scrollbar-width: none;
+    }
+    .content::-webkit-scrollbar { display: none; }
+
+    /* Trading page content only */
+    .account-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      min-height: 54px;
+      color: #777;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .account-label { display: flex; align-items: center; gap: 8px; }
+    .history-icon { color: #f5f5f5; font-size: 28px; margin-top: 2px; }
+
+    .balance-block { text-align: right; margin-top: 2px; }
+    .balance-main {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 10px;
+      direction: ltr;
+      font-size: 37px;
+      line-height: 1.3;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .balance-main .currency { font-size: 18px; font-weight: 600; }
+    .balance-main .currency i { font-size: 12px; margin-right: 5px; }
+    .balance-usd { color: #777; font-size: 15px; margin-top: 12px; }
+    .balance-line {
+      width: 120px;
+      height: 3px;
+      border-radius: 4px;
+      background: #00c58b;
+      margin-top: -15px;
+      margin-left: 4px;
+    }
+
+    .daily-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 48px;
+      color: #777;
+      font-size: 15px;
+      white-space: nowrap;
+    }
+    .daily-value { color: #f5f5f5; font-size: 19px; font-weight: 600; }
+    .daily-chevron {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 27px;
+      height: 27px;
+      background: #242424;
+      border-radius: 7px;
+      color: #eee;
+      font-size: 15px;
+    }
+    .action-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      align-items: end;
+      gap: 8px;
+      margin-top: 55px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+    .action-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      min-width: 0;
+    }
+    .action-circle {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #f5f5f5, #bdbdbd);
+      color: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 35px;
+      box-shadow: inset 0 1px 2px rgba(255,255,255,.65);
+    }
+    .action-label {
+      font-size: 31px;
+      line-height: 1.2;
+      font-weight: 800;
+      white-space: nowrap;
+      color: #fff;
+    }
+    .banner-wrap {
+      width: calc(100% + 44px);
+      margin-right: -22px;
+      margin-left: -22px;
+      line-height: 0;
+    }
+    .banner-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 180px;
+      object-fit: contain;
+    }
+
+    /* Bottom navigation intentionally kept unchanged */
+    .bottom-nav {
+      position: fixed; left: 0; right: 0; bottom: 0; width: 100%; max-width: 430px;
+      height: 110px; background: rgba(0, 0, 0, 0.95); border-top: 1px solid rgba(255,255,255,0.08);
+      display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: flex-start;
+      padding: 10px 12px 12px; gap: 6px; z-index: 100;
+    }
+
+    .nav-item {
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 4px; text-decoration: none; color: rgba(255,255,255,0.72); background: transparent; border: none;
+      border-radius: 16px; padding: 10px 6px 8px; min-height: 70px; transition: all 0.18s ease;
+      transform: translateY(0); cursor: pointer; font-family: 'Cairo', sans-serif;
+    }
+
+    .nav-item i { font-size: 24px; line-height: 1; transition: transform 0.18s ease, color 0.18s ease; }
+    .nav-item span { font-size: 11px; line-height: 1.2; font-weight: 500; letter-spacing: 0.2px; white-space: nowrap; }
+
+    .nav-item:focus, .nav-item:focus-visible { outline: none; background: transparent; }
+    .nav-item:hover { transform: translateY(-1px); }
+    .nav-item:active { transform: translateY(0) scale(0.98); }
+    .nav-item.active { background: transparent; color: #fff; }
+    .nav-item.active i { transform: scale(1.04); color: #fff; }
+    .nav-item.home-badge { position: relative; }
+
+    .badge-count {
+      position: absolute; top: 2px; right: 12px; background: #ff3f66; color: #fff; font-size: 10px;
+      font-weight: 700; padding: 2px 6px; border-radius: 10px; min-width: 24px; text-align: center; line-height: 1.4; display: block;
+    }
+
+    @media (max-width: 380px) {
+      .nav-item i { font-size: 22px; }
+      .nav-item span { font-size: 10px; }
+      .balance-main { font-size: 32px; }
+      .action-circle { width: 66px; height: 66px; font-size: 30px; }
+      .action-label { font-size: 25px; }
+      .daily-row { font-size: 13px; gap: 6px; }
+      .daily-value { font-size: 17px; }
+      .banner-image { max-height: 160px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="phone-container">
+    <main class="content">
+      <section class="account-row" aria-label="ملخص الحساب">
+        <i class="fa-solid fa-clock-rotate-left history-icon" aria-label="السجل"></i>
+        <div class="balance-block">
+          <div class="account-label"><i class="fa-regular fa-eye"></i><span>الحساب الكلي</span></div>
+          <div class="balance-main">
+            <span class="currency"><i class="fa-solid fa-caret-down"></i> USDT</span>
+            <span>0.08</span>
+          </div>
+          <div class="balance-usd">$0.07991≈</div>
+        </div>
+      </section>
+      <div class="balance-line" aria-hidden="true"></div>
+
+      <section class="daily-row" aria-label="ربح وخسارة اليوم">
+        <span class="daily-chevron"><i class="fa-solid fa-chevron-left"></i></span>
+        <span class="daily-value">($0.00)(0%)</span>
+        <span>ربح وخسارة اليوم</span>
+      </section>
+
+      <section class="action-row" aria-label="إجراءات الحساب">
+        <div class="action-item">
+          <div class="action-circle"><i class="fa-solid fa-right-left"></i></div>
+          <div class="action-label">أفيس</div>
+        </div>
+        <div class="action-item">
+          <div class="action-circle"><i class="fa-solid fa-arrow-up"></i></div>
+          <div class="action-label">سحب</div>
+        </div>
+        <div class="action-item">
+          <div class="action-circle"><i class="fa-solid fa-arrow-down"></i></div>
+          <div class="action-label">شحن</div>
+        </div>
+      </section>
+
+      <div class="banner-wrap">
+        <!-- ارفع صورة البنر باسم trading-banner.png بجانب ملف trading.html -->
+        <img class="banner-image" src="trading-banner.png" alt="بنر متجر Google Play Android"
+             onerror="this.style.display='none'">
+      </div>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Bottom navigation">
+      <a class="nav-item" href="wallet.html" aria-label="الرصيد">
+        <i class="fa-solid fa-wallet"></i>
+        <span>الرصيد</span>
+      </a>
+
+      <a class="nav-item" href="futures.html" aria-label="العقود الآجلة">
+        <i class="fa-solid fa-chart-line"></i>
+        <span>الدردشة</span>
+      </a>
+
+      <a class="nav-item active" href="trading.html" aria-label="التداول">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>التداول</span>
+      </a>
+
+      <a class="nav-item" href="markets.html" aria-label="الأسواق">
+        <i class="fa-solid fa-chart-column"></i>
+        <span>المهام</span>
+      </a>
+
+      <a class="nav-item home-badge" href="home.html" aria-label="الصفحة الرئيسية">
+        <span class="badge-count">99+</span>
+        <i class="fa-solid fa-house"></i>
+        <span>الرئيسية</span>
+      </a>
+    </nav>
+  </div>
+</body>
+</html>
