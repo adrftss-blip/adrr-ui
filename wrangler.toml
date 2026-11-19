@@ -1,0 +1,9 @@
+name = "adrr-ui"
+main = "worker.js"
+compatibility_date = "2026-11-19"
+keep_vars = true
+
+[assets]
+directory = "."
+binding = "ASSETS"
+run_worker_first = true

@@ -37,13 +37,28 @@ function showError(message) {
   statusBox.style.color = '#ffb4ab';
 }
 
-function handleGoogleCredential(response) {
-  if (response && response.credential) {
-    // هذا انتقال للصفحة الرئيسية فقط؛ التحقق الآمن من الرمز يحتاج خادماً.
-    sessionStorage.setItem('optes_google_credential_received', 'true');
-    window.location.replace(new URL('home.html', window.location.href).href);
-  } else {
+async function handleGoogleCredential(response) {
+  if (!response || !response.credential) {
     showError('لم يتم اختيار حساب Google. حاول مرة أخرى.');
+    return;
+  }
+
+  try {
+    statusBox.style.display = 'none';
+    const result = await fetch('/api/auth/google', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'same-origin',
+      body: JSON.stringify({ credential: response.credential })
+    });
+    const data = await result.json().catch(() => ({}));
+    if (!result.ok || !data.ok) {
+      showError(data.error || 'تعذّر تسجيل الدخول. حاول مرة أخرى.');
+      return;
+    }
+    window.location.replace(new URL('home.html', window.location.href).href);
+  } catch {
+    showError('تعذّر الاتصال بالخادم. تحقق من الإنترنت وحاول مرة أخرى.');
   }
 }
 
