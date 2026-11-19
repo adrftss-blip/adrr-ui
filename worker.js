@@ -84,7 +84,7 @@ async function handleGoogleLogin(request, env, url) {
   if (request.headers.get("Origin") !== url.origin) {
     return json({ error: "طلب غير مسموح." }, 403);
   }
-  if (!env.GOOGLE_CLIENT_ID || !env.SESSION_SECRET) {
+  if (!env.GOOGLE_CLIENT_ID || !env.SESSION_SECRET || env.SESSION_SECRET.length < 32) {
     return json({ error: "إعدادات تسجيل الدخول غير مكتملة على الخادم." }, 503);
   }
   if (Number(request.headers.get("Content-Length") || 0) > 20000) {
@@ -155,7 +155,7 @@ async function handleRequest(request, env) {
   }
 
   if (path === "/api/auth/session" && request.method === "GET") {
-    if (!env.SESSION_SECRET) return json({ authenticated: false }, 503);
+    if (!env.SESSION_SECRET || env.SESSION_SECRET.length < 32) return json({ authenticated: false }, 503);
     const session = await readSession(request, env.SESSION_SECRET);
     return session
       ? json({ authenticated: true, email: session.email || null })
@@ -179,15 +179,18 @@ async function handleRequest(request, env) {
 
   const isHtmlPage = path === "/" || path.toLowerCase().endsWith(".html");
   const isLoginPage = path === "/" || path === "/index.html";
-  if (isHtmlPage && !isLoginPage) {
-    if (!env.SESSION_SECRET) {
+  if (isHtmlPage) {
+    if (!env.SESSION_SECRET || env.SESSION_SECRET.length < 32) {
       return new Response("إعدادات الجلسة غير مكتملة على الخادم.", {
         status: 503,
         headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
       });
     }
     const session = await readSession(request, env.SESSION_SECRET);
-    if (!session) {
+    if (isLoginPage && session) {
+      return Response.redirect(new URL("/home.html", url.origin), 302);
+    }
+    if (!isLoginPage && !session) {
       return Response.redirect(new URL("/index.html", url.origin), 302);
     }
   }
